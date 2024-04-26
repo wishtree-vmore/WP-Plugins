@@ -1,0 +1,42 @@
+.slideshow-container {
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.slide {
+    display: none;
+    text-align: center;
+}
+.slide img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+}
+.progress-bar-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Adjust the spacing above the progress bar */
+}
+
+.progress-dot {
+    width: 10px; /* Size of each progress dot */
+    height: 10px;
+    margin: 0 5px; /* Adjust the spacing between dots */
+    border-radius: 50%;
+    background-color: #ddd; /* Color of inactive dots */
+    transition: background-color 0.3s ease;
+}
+
+.progress-dot.active {
+    background-color: #4CAF50; /* Color of active dot */
+}
+
