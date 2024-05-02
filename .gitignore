@@ -6,7 +6,7 @@ wp-content/plugins/elementor
 wp-content/plugins/simple-custom-post-order
 wp-content/plugins/advanced-custom-fields
 wp-content/plugins/custom-post-type-ui
-wp-content/plugins/akismet 
+wp-content/plugins/akismet
 
 # Ignore configuration files
 wp-config.php
