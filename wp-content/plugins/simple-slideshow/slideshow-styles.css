@@ -10,6 +10,10 @@ body{
     margin: 8px;
 }
 
+.caption{
+    text-align: center;
+}
+
 .slider-container {
     position: relative;
 }
@@ -121,8 +125,4 @@ body{
 
 .wp-block-post-title{
     display: none;
-}
-
-.caption{
-    text-align: center;
 }
