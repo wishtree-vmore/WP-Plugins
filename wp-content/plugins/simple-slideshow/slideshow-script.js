@@ -1,43 +1,57 @@
-var slideIndex = 0;
-var progressInterval;
-var progressBarContainer;
+jQuery(function($) {
+    var currentIndex = 0;
+    var slideCount = $('.slides li').length;
+    var autoplayInterval = 3000;
 
-function showSlides() {
-    var slides = document.getElementsByClassName("slide");
-    progressBarContainer = document.querySelector(".progress-bar-container");
-
-    for (var i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    for (var i = 0; i < slideCount; i++) {
+        $('.slider-dot-nav').append('<li><a href="#"></a></li>');
     }
 
-    slideIndex++;
-    if (slideIndex > slides.length) {
-        slideIndex = 1;
+    showSlide(currentIndex);
+    $('.slider-dot-nav li:first-child a').addClass('selected');
+
+    $('.next').click(function(e) {
+        e.preventDefault();
+        currentIndex = (currentIndex + 1) % slideCount;
+        showSlide(currentIndex);
+    });
+
+    $('.prev').click(function(e) {
+        e.preventDefault();
+        currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+        showSlide(currentIndex);
+    });
+
+    $('.slider-dot-nav li a').click(function(e) {
+        e.preventDefault();
+        currentIndex = $(this).parent().index();
+        showSlide(currentIndex);
+    });
+
+    var autoplayTimer = setInterval(function() {
+        currentIndex = (currentIndex + 1) % slideCount;
+        showSlide(currentIndex);
+    }, autoplayInterval);
+
+    $('.slider-container').hover(
+        function() {
+            clearInterval(autoplayTimer);
+        },
+        function() {
+            autoplayTimer = setInterval(function() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                showSlide(currentIndex);
+            }, autoplayInterval);
+        }
+    );
+
+    function showSlide(index) {
+        $('.slides li').removeClass('active').fadeOut();
+        $('.slides li:eq(' + index + ')').addClass('active').fadeIn();
+        $('.slider-dot-nav li a').removeClass('selected');
+        $('.slider-dot-nav li:eq(' + index + ') a').addClass('selected');
     }
-
-    slides[slideIndex - 1].style.display = "block";
-
-    // Update progress bar
-    clearInterval(progressInterval);
-    updateProgressBar(slides.length);
-
-    // Set the timeout for the next slide
-    progressInterval = setTimeout(showSlides, 2000); // Change 2000 to your desired interval in milliseconds (2 seconds in this example)
-}
-
-function updateProgressBar(totalSlides) {
-    progressBarContainer.innerHTML = ""; // Clear previous progress bar
-
-    for (var i = 0; i < totalSlides; i++) {
-        var dot = document.createElement("span");
-        dot.className = "progress-dot";
-        progressBarContainer.appendChild(dot);
-    }
-
-    var activeDot = progressBarContainer.querySelectorAll(".progress-dot")[slideIndex - 1];
-    activeDot.classList.add("active");
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    showSlides();
 });
+
+
+  

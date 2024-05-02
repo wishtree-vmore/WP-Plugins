@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Simple Slideshow Plugin
-Description: A simple slideshow plugin for displaying custom post type items.
+Description: A simple slideshow plugin which creates a custom post type for slideshow images using which admin can add or remove images in slideshow.
 Version: 1.0
-Author: You
+Author: Vishakha More
 */
 
 // Shortcode for displaying the slideshow
@@ -49,7 +49,7 @@ function display_slideshow($atts)
 {
     $atts = shortcode_atts(
         array(
-            'post_type' => 'slideshow_item', // Customize this if your CPT has a different name
+            'post_type' => 'slideshow_item',
             'posts_per_page' => -1,
         ),
         $atts
@@ -58,15 +58,23 @@ function display_slideshow($atts)
     $query = new WP_Query($atts);
 
     if ($query->have_posts()) {
-        $output = '<div class="slideshow-container">';
+        $output = "";
+        $output .= '<div class="slider-container">';
+        $output .= '<ul class="slides">';
         while ($query->have_posts()) {
             $query->the_post();
             $title = get_the_title();
-            $image = get_the_post_thumbnail_url(get_the_ID(), 'large'); // Change 'large' to your desired image size
-            $output .= '<div class="slide"><img src="' . esc_url($image) . '" alt="' . esc_attr($title) . '"><div class="caption">' . esc_html($title) . '</div></div>';
+            $image = get_the_post_thumbnail_url(get_the_ID(), 'large');
+            $output .= '<li class="active"><img src="' . esc_url($image) . '" alt="' . esc_attr($title) . '"><div class="caption"><em>' . esc_html($title) . '</em></div></li>';
         }
+        $output .= '</ul>';
+        $output .= '<ul class="slider-nav">';
+        $output .= '<li class="next"><a href="#"></a></li>';
+        $output .= '<li class="prev"><a href="#"></a></li>';
+        $output .= '</ul>';
+        $output .= '<ol class="slider-dot-nav">';
+        $output .= '</ol>';
         $output .= '</div>';
-        $output .= '<div class="progress-bar-container"></div>';
         wp_reset_postdata();
         return $output;
     } else {
