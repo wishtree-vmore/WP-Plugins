@@ -12,6 +12,7 @@ body{
 
 .slider-container {
     position: relative;
+    overflow: hidden;
 }
 
 .slides {
@@ -44,7 +45,7 @@ body{
 }
 .slides li.active img:hover{
     transform: scaleX(1.05);
-    opacity: 0.8;
+    opacity: 0.6;
     transition: transform 0.6s ease-in-out;
 }
 
@@ -90,19 +91,18 @@ body{
 }
 .slider-nav .next{
     float: right;
-    margin-right: -50px;
 }
 
 .slider-nav .prev a::before{
     content: "\e901";
     font-size: 40px;
     font-family: "Icomoon-arrow", sans-serif;
+    color: #333;
 }
 .slider-nav .prev{
     float: left;
-    margin-left: -50px;
 }
-.slider-nav a{
+.page-content .slider-nav a{
     text-decoration: none;
 }
 .slider-nav a:focus-visible, .slider-nav a:focus{
@@ -112,6 +112,7 @@ body{
     content: "\e900";
     font-size: 40px;
     font-family: "Icomoon-arrow", sans-serif;
+    color: #333;
 }
 
 .slider-nav li {
