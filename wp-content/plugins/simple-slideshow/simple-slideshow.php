@@ -38,7 +38,7 @@ function create_slideshow_item_cpt()
         'has_archive' => true,
         'rewrite' => array('slug' => 'slideshow-items'),
         'menu_icon' => 'dashicons-images-alt2',
-        'supports' => array('title', 'thumbnail'),
+        'supports' => array('title', 'thumbnail','editor'),
     );
 
     register_post_type('slideshow_item', $args);
@@ -65,7 +65,8 @@ function display_slideshow($atts)
             $query->the_post();
             $title = get_the_title();
             $image = get_the_post_thumbnail_url(get_the_ID(), 'large');
-            $output .= '<li class="active"><img src="' . esc_url($image) . '" alt="' . esc_attr($title) . '"><div class="caption"><em>' . esc_html($title) . '</em></div></li>';
+            $description = get_the_content();
+            $output .= '<li class="active"><img src="' . esc_url($image) . '" alt="' . esc_attr($title) . '"><div class="caption"><h2>' . esc_html($title) . '</h2><p class="slider-desc">' . wp_kses_post($description) . '</p></div></li>';
         }
         $output .= '</ul>';
         $output .= '<ul class="slider-nav">';

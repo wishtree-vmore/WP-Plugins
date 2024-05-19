@@ -40,7 +40,7 @@ class WPContributors_Meta_Box
 	public static function html($post)
 	{
 		$selected_users_ids = get_post_meta($post->ID, '_selected_users_ids', true);
-		$users = get_users(array('role__in' => array('author', 'contributor')));
+		$users = get_users(array('role__in' => array('author','admin', 'contributor')));
 		echo '<label for="users">Select Users:</label><br>';
 
 		foreach ($users as $user) {
